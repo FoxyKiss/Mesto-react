@@ -2,7 +2,7 @@ import React from 'react';
 import api from '../utils/Api'
 import Card from './Card'
 
-export default function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
+export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
   //? State переменные данных профиля
   const [userName, setUserName] = React.useState('');
   const [userAbout, setUserAbout] = React.useState('');
@@ -45,7 +45,7 @@ export default function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
         <ul className="cards__list">
           {cards.map((card) => {
             return (
-              <Card key={card._id} name={card.name} link={card.link} likes={card.likes} />
+              <Card key={card._id} name={card.name} link={card.link} likes={card.likes} onCardClick={onCardClick} />
             );
           })}
         </ul>

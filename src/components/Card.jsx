@@ -1,8 +1,14 @@
 //? Разметка краточек
-export default function Card({ name, link, likes }) {
+export default function Card({ name, link, likes, onCardClick }) {
+
+  function handleCardClick() {
+    onCardClick({ name, link })
+  }
+
+
   return (<li className="cards__list_element">
     <button type="button" className="cards__delete-button hide_delete-button"></button>
-    <img className="cards__image" src={link} alt={name} />
+    <img className="cards__image" src={link} alt={name} onClick={handleCardClick} />
     <div className="cards__info">
       <h2 className="cards__name">{name}</h2>
       <div className="cards__like-container">
