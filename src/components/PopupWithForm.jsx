@@ -1,5 +1,6 @@
 import React from 'react'
 export default function PopUpWithForm({ title, name, formId, buttonText, isOpen, onClose, children }) {
+  //? Функция открытия Popup
   function openPopup() {
     if (isOpen) {
       const open = 'popup_open'
@@ -8,6 +9,7 @@ export default function PopUpWithForm({ title, name, formId, buttonText, isOpen,
   }
   const openPopClass = openPopup()
 
+  //? Основная разметка Popup
   return (
     <div className={`popup popup_${name} ${openPopClass} `}>
       <div className="popup__container">

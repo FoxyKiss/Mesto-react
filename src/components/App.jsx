@@ -13,6 +13,7 @@ function App() {
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
 
+  //? Функции изменения стейтов для модалок
   function handleEditProfileClick() {
     setEditProfilePopupOpen(true);
   }
@@ -31,22 +32,21 @@ function App() {
     setAddPlacePopupOpen(false);
   }
 
+  //? Разметка страницы
   return (
-    <div>
-      <div className="page">
-        <Header />
-        <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} />
-        <Footer />
-        <PopUpWithForm name='edit-profile' title='Редактировать профиль' formId='profileForm' buttonText='Сохранить' isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
-          <ProfilePopup />
-        </PopUpWithForm>
-        <PopUpWithForm name='create-cards' title='Новое место' formId='cardForm' buttonText='Сохранить' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
-          <CardPopup />
-        </PopUpWithForm>
-        <PopUpWithForm name='change-avatar' title='Обновить Аватар' formId='avatarForm' buttonText='Сохранить' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
-          <AvatarPopup />
-        </PopUpWithForm>
-      </div>
+    <div className="page">
+      <Header />
+      <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} />
+      <Footer />
+      <PopUpWithForm name='edit-profile' title='Редактировать профиль' formId='profileForm' buttonText='Сохранить' isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
+        <ProfilePopup />
+      </PopUpWithForm>
+      <PopUpWithForm name='create-cards' title='Новое место' formId='cardForm' buttonText='Сохранить' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
+        <CardPopup />
+      </PopUpWithForm>
+      <PopUpWithForm name='change-avatar' title='Обновить Аватар' formId='avatarForm' buttonText='Сохранить' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
+        <AvatarPopup />
+      </PopUpWithForm>
       <div className="popup popup_images">
         <div className="popup__image-container">
           <img className="popup__image" src="." alt="." />
@@ -63,19 +63,7 @@ function App() {
           <button id="popupDeleteCloseButton" className="popup__close-button" type="button"></button>
         </div>
       </div>
-      <template id="cardTemplate">
-        <li className="cards__list_element">
-          <button type="button" className="cards__delete-button hide_delete-button"></button>
-          <img className="cards__image" alt="." />
-          <div className="cards__info">
-            <h2 className="cards__name"></h2>
-            <div className="cards__like-container">
-              <button type="button" className="cards__like-button"></button>
-              <p className="cards__like-number"></p>
-            </div>
-          </div>
-        </li>
-      </template>
+
     </div>
   );
 }
