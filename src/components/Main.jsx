@@ -26,7 +26,7 @@ export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardCl
 
   //? Разметка основного контента
   return (
-    <div className="content">
+    <main className="content">
       <section className="profile">
         <div name="profile" className="profile__avatar-container">
           <img className="profile__avatar" src={userAvatar} alt="Аватар" />
@@ -50,6 +50,6 @@ export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardCl
           })}
         </ul>
       </section>
-    </div>
+    </main>
   );
 }
