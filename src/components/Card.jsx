@@ -1,19 +1,35 @@
-//? Разметка краточек
-export default function Card({ name, link, likes, onCardClick }) {
+import React from 'react'
+import { currentUserContext } from '../contexts/currentUserContext'
 
+//? Разметка краточек
+export default function Card({ card, onCardClick, onCardDelete }) {
+  //? Подписываемся на контекст для получения данных пользователя
+  const currentUser = React.useContext(currentUserContext)
+
+  //? Определяем, являемся ли мы владельцем текущей карточки и создаём переменную класса
+  const isOwn = card.owner._id === currentUser._id;
+  const deleteButtonClass = (`cards__delete-button ${isOwn ? '' : 'hide_delete-button'}`);
+  //? Определяем, есть ли у карточки лайк, поставленный текущим пользователем  и создаём переменную класса
+  const isLiked = card.likes.some(i => i._id === currentUser._id);
+  const likeButtonClass = `cards__like-button ${isLiked ? 'cards__like-button_active' : ''}`;
+
+  //? Функция для модального окна изображения
   function handleCardClick() {
-    onCardClick({ name, link })
+    onCardClick(card.name, card.link)
+  }
+  //? Функция для удаления карточки
+  function handleCardDelete() {
+    onCardDelete(card._id)
   }
 
-
   return (<li className="cards__list_element">
-    <button type="button" className="cards__delete-button hide_delete-button"></button>
-    <img className="cards__image" src={link} alt={name} onClick={handleCardClick} />
+    <button type="button" className={deleteButtonClass} onClick={handleCardDelete}></button>
+    <img className="cards__image" src={card.link} alt={card.name} onClick={handleCardClick} />
     <div className="cards__info">
-      <h2 className="cards__name">{name}</h2>
+      <h2 className="cards__name">{card.name}</h2>
       <div className="cards__like-container">
-        <button type="button" className="cards__like-button"></button>
-        <p className="cards__like-number">{likes.length}</p>
+        <button type="button" className={likeButtonClass}></button>
+        <p className="cards__like-number">{card.likes.length}</p>
       </div>
     </div>
   </li>);
