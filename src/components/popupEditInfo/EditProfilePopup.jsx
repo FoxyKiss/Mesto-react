@@ -18,8 +18,8 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   const profileInfo = { name, setName, description, setDescription }
 
   //? Функция отправки формы
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit(evt) {
+    evt.preventDefault();
 
     onUpdateUser({
       name,

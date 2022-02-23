@@ -57,6 +57,18 @@ class Api {
     }).then(this._checkResponse)
   }
 
+  setAvatar(data) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        avatar: data.avatar
+      })
+    }).then(this._parseResponse)
+  }
 }
 const api = new Api('https://mesto.nomoreparties.co/v1/cohort-34', '89a2c951-8971-4216-9141-16ef211258eb')
 
