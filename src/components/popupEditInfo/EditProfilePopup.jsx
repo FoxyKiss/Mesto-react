@@ -1,7 +1,7 @@
 import React from 'react'
-import PopUpWithForm from './PopupWithForm'
-import { ProfilePopup } from './popupsMarkup/popupsMarkup'
-import { currentUserContext } from '../contexts/currentUserContext'
+import PopUpWithForm from '../PopupWithForm'
+import { ProfilePopup } from '../popupsMarkup/popupsMarkup'
+import { currentUserContext } from '../../contexts/currentUserContext'
 
 export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   //? Подписываемся на контекст для получения данных пользователя

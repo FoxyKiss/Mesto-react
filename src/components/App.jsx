@@ -4,8 +4,9 @@ import Header from './Header'
 import Main from './Main'
 import Footer from './Footer'
 import PopUpWithForm from './PopupWithForm'
-import EditProfilePopup from './EditProfilePopup'
 import ImagePopup from './ImagePopup'
+import EditProfilePopup from './popupEditInfo/EditProfilePopup'
+import EditAvatarPopup from './popupEditInfo/EditAvatarPopup'
 import api from '../utils/Api'
 import { CardPopup, AvatarPopup } from './popupsMarkup/popupsMarkup'
 import { currentUserContext } from '../contexts/currentUserContext'
@@ -76,9 +77,7 @@ function App() {
         <PopUpWithForm name='create-cards' title='Новое место' formId='cardForm' buttonText='Сохранить' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
           <CardPopup />
         </PopUpWithForm>
-        <PopUpWithForm name='change-avatar' title='Обновить Аватар' formId='avatarForm' buttonText='Сохранить' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
-          <AvatarPopup />
-        </PopUpWithForm>
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
         <ImagePopup card={selectedCard} isOpen={imagePopupOpen} onClose={closeAllPopups} />
       </currentUserContext.Provider>
     </div>
