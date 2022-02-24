@@ -9,5 +9,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: 0.5s linear; 
+  transition: 0.5s linear;
+}
+
+@media screen and (max-width:600px) {
+  .popup {
+      align-items: flex-start;
+  }
 }

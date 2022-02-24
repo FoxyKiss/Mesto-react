@@ -10,3 +10,11 @@
   color: #000;
   margin: auto;
 }
+
+@media screen and (max-width:600px) {
+  .popup__container {
+      max-width: 282px;
+      position: fixed;
+      top: 300px;
+  }
+}

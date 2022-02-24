@@ -1,10 +1,8 @@
 import React from 'react';
 //? Импорты компонентов
 import Card from './Card'
-
 //? Импорт контекста
 import { currentUserContext } from '../contexts/currentUserContext'
-
 
 export default function Main({ cardProps, onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
   //? Подписываемся на контекст для получения данных пользователя

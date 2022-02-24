@@ -8,3 +8,23 @@
   margin: 0;
   padding: 0;
 }
+
+@media screen and (max-width: 924px) {
+  .cards__list {
+      max-width: 585px;
+  }
+}
+
+@media screen and (max-width:600px) {
+  .cards__list {
+      max-width: 320px;
+      grid-template-columns: repeat(auto-fill, 320px);
+  }
+}
+
+@media screen and (max-width:360px) {
+  .cards__list {
+      max-width: 282px;
+      grid-template-columns: repeat(auto-fill, 282px);
+  }
+}
