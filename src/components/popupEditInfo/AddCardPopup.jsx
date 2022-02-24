@@ -6,7 +6,7 @@ export default function AddCardPopup({ isOpen, onClose, onAddCard }) {
   //?State переменные для полей ввода
   const [name, setName] = React.useState('')
   const [link, setLink] = React.useState('')
-  const cardSetStates = { setName, setLink }
+  const cardStates = { name, link, setName, setLink }
 
   //? Функция отправки формы
   function handleSubmit(evt) {
@@ -17,6 +17,8 @@ export default function AddCardPopup({ isOpen, onClose, onAddCard }) {
       link,
     });
     evt.target.reset()
+    setName('')
+    setLink('')
   }
   const formProps = {
     name: 'create-cards',
@@ -28,7 +30,7 @@ export default function AddCardPopup({ isOpen, onClose, onAddCard }) {
 
   return (
     <PopUpWithForm formProps={formProps} isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit}>
-      <CardPopup cardSetStates={cardSetStates} />
+      <CardPopup cardStates={cardStates} />
     </PopUpWithForm>
   );
 }

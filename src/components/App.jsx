@@ -71,7 +71,7 @@ function App() {
         setCardsList(cardsList.filter((item) => {
           return item._id !== cardId
         }))
-      })
+      }).catch(err => console.log(`Ошибка: ${err.status}`));
   }
   //? Функция лайка карточки
   function handleCardLike(card) {
@@ -80,11 +80,11 @@ function App() {
     if (!isLiked) {
       api.activeLike(card).then((newCard) => {
         setCardsList((state) => state.map((c) => c._id === card._id ? newCard : c));
-      });
+      }).catch(err => console.log(`Ошибка: ${err.status}`));;
     } else {
       api.deactiveLike(card).then((newCard) => {
         setCardsList((state) => state.map((c) => c._id === card._id ? newCard : c));
-      });
+      }).catch(err => console.log(`Ошибка: ${err.status}`));;
     }
   }
 
@@ -93,26 +93,24 @@ function App() {
     api.setInfo(data)
       .then((info) => {
         setCurrentUser(info);
-      }).catch((err) => {
-        console.log(`Ошибка: ${err.status}`)
-      });
-    closeAllPopups()
+        closeAllPopups()
+      }).catch(err => console.log(`Ошибка: ${err.status}`));
   }
   //? Обработчик изменения аватара
   function handleUpdateAvatar(data) {
     api.setAvatar(data)
       .then((info) => {
-        setCurrentUser({ name: currentUser.name, about: currentUser.about, avatar: info.avatar })
-      })
-    closeAllPopups()
+        setCurrentUser((user) => ({ ...user, avatar: info.avatar }))
+        closeAllPopups()
+      }).catch(err => console.log(`Ошибка: ${err.status}`));
   }
   //? Обработчик создания карточки
   function handleAddCard(data) {
     api.postCard(data)
       .then((newCard) => {
         setCardsList([newCard, ...cardsList]);
-      })
-    closeAllPopups()
+        closeAllPopups()
+      }).catch(err => console.log(`Ошибка: ${err.status}`));
   }
   //? Свойства card для передачи в Main
   const cardProps = {

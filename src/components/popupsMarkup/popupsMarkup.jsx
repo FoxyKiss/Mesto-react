@@ -25,23 +25,25 @@ function ProfilePopup({ profileInfo }) {
   );
 }
 
-function CardPopup({ cardSetStates }) {
+function CardPopup({ cardStates }) {
   function setName(evt) {
-    cardSetStates.setName(evt.target.value);
+    cardStates.setName(evt.target.value);
   }
 
   function setLink(evt) {
-    cardSetStates.setLink(evt.target.value);
+    cardStates.setLink(evt.target.value);
   }
+
+
   return (
     <>
       <label className="popup__input-label">
         <input name="name" id="cardName" className="popup__input" type="text" placeholder="Название" required
-          minLength="2" maxLength="30" onChange={setName} />
+          minLength="2" maxLength="30" value={cardStates.name} onChange={setName} />
         <span className="popup__input-error cardName-error"></span>
       </label>
       <label className="popup__input-label">
-        <input name="link" id="cardLink" className="popup__input" type="url" placeholder="Ссылка на картинку" required onChange={setLink} />
+        <input name="link" id="cardLink" className="popup__input" type="url" placeholder="Ссылка на картинку" value={cardStates.link} required onChange={setLink} />
         <span className="popup__input-error cardLink-error"></span>
       </label>
     </>
