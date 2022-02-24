@@ -27,10 +27,17 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     });
   }
 
+  //? Свойства формы
+  const formProps = {
+    name: 'edit-profile',
+    title: 'Редактировать профиль',
+    buttonText: 'Сохранить',
+    formId: 'profileForm'
+  }
 
   //? Разметка ProfilePopup
   return (
-    <PopUpWithForm name='edit-profile' title='Редактировать профиль' formId='profileForm' buttonText='Сохранить' isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit}>
+    <PopUpWithForm formProps={formProps} isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit}>
       <ProfilePopup profileInfo={profileInfo} />
     </PopUpWithForm>
   );

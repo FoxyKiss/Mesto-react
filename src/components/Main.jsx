@@ -1,37 +1,14 @@
 import React from 'react';
+//? Импорты компонентов
 import Card from './Card'
-import api from '../utils/Api'
+
+//? Импорт контекста
 import { currentUserContext } from '../contexts/currentUserContext'
 
-export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
+
+export default function Main({ cardProps, onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
   //? Подписываемся на контекст для получения данных пользователя
   const currentUser = React.useContext(currentUserContext)
-
-  //? State переменная для получения массива карточек
-  const [cardsList, setCardsList] = React.useState([]);
-
-  //?Изменение state переменной для получения массива карточек
-  React.useEffect(() => {
-    Promise.all([api.getStartCards()])
-      .then(([cardsList]) => {
-        setCardsList(cardsList);
-      }).catch((err) => {
-        console.log(`Ошибка: ${err.status}`)
-      });
-  }, []);
-
-  //? Реализация удаления карточки
-  function handleCardDelete(cardId) {
-    api.deleteCard(cardId)
-      .then(() => {
-        setCardsList(cardsList.filter((item) => {
-          return item._id !== cardId
-        }))
-      })
-  }
-
-  //? Реализация лайка карточки
-
 
   //? Разметка основного контента
   return (
@@ -52,9 +29,9 @@ export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardCl
       </section>
       <section className="cards">
         <ul className="cards__list">
-          {cardsList.map((card) => {
+          {cardProps.cardsList.map((card) => {
             return (
-              <Card key={card._id} card={card} onCardClick={onCardClick} onCardDelete={handleCardDelete} />
+              <Card key={card._id} card={card} onCardClick={onCardClick} onCardDelete={cardProps.onCardDelete} />
             );
           })}
         </ul>

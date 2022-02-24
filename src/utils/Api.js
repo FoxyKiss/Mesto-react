@@ -46,6 +46,21 @@ class Api {
     }).then(this._checkResponse)
   }
 
+  postCard(data) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: 'POST',
+      headers:
+      {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link
+      })
+    }).then(this._checkResponse)
+  }
+
   deleteCard(_id) {
     return fetch(`${this._baseUrl}/cards/${_id}`, {
       method: 'DELETE',
@@ -67,7 +82,7 @@ class Api {
       body: JSON.stringify({
         avatar: data.avatar
       })
-    }).then(this._parseResponse)
+    }).then(this._checkResponse)
   }
 }
 const api = new Api('https://mesto.nomoreparties.co/v1/cohort-34', '89a2c951-8971-4216-9141-16ef211258eb')

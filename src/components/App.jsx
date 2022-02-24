@@ -7,9 +7,13 @@ import PopUpWithForm from './PopupWithForm'
 import ImagePopup from './ImagePopup'
 import EditProfilePopup from './popupEditInfo/EditProfilePopup'
 import EditAvatarPopup from './popupEditInfo/EditAvatarPopup'
-import api from '../utils/Api'
-import { CardPopup } from './popupsMarkup/popupsMarkup'
+import AddCardPopup from './popupEditInfo/AddCardPopup'
+
+//? Импорт контекста
 import { currentUserContext } from '../contexts/currentUserContext'
+
+//? Импорт компонента api
+import api from '../utils/Api'
 
 function App() {
   //? State переменные для активации модалок
@@ -18,9 +22,10 @@ function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [imagePopupOpen, setImagePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({ name: '', link: '' })
-
   //? State переменная для получения информации о пользователе
   const [currentUser, setCurrentUser] = React.useState({ name: '', about: '', avatar: '' })
+  //? State переменная для получения массива карточек
+  const [cardsList, setCardsList] = React.useState([]);
 
   //? Функции изменения стейтов для модалок
   function handleEditProfileClick() {
@@ -47,15 +52,29 @@ function App() {
     setImagePopupOpen(true);
   }
 
-  //?Изменение state переменной для получения информации о пользователе
+  //?Изменение state переменной для получения информации о пользователе и массива карточек
   React.useEffect(() => {
-    Promise.all([api.getInfo()])
-      .then(([info]) => {
+    Promise.all([api.getInfo(), api.getStartCards()])
+      .then(([info, cardsList]) => {
         setCurrentUser(info);
+        setCardsList(cardsList);
       }).catch((err) => {
         console.log(`Ошибка: ${err.status}`)
       });
   }, []);
+
+
+  //? Функция удаления карточки
+  function handleCardDelete(cardId) {
+    api.deleteCard(cardId)
+      .then(() => {
+        setCardsList(cardsList.filter((item) => {
+          return item._id !== cardId
+        }))
+      })
+  }
+  //? Функция лайка карточки
+
 
   //? Обработчик изменения данных профиля
   function handleUpdateUser(data) {
@@ -71,9 +90,22 @@ function App() {
   function handleUpdateAvatar(data) {
     api.setAvatar(data)
       .then((info) => {
-        setCurrentUser({ name: currentUser.name, about: currentUser.about, avatar: info.avatar })
+        setCurrentUser(currentUser.avatar = info.avatar)
       })
     closeAllPopups()
+  }
+  //? Обработчик создания карточки
+  function handleAddCard(data) {
+    api.postCard(data)
+      .then((newCard) => {
+        setCardsList([newCard, ...cardsList]);
+      })
+    closeAllPopups()
+  }
+  //? Свойства card для передачи в Main
+  const cardProps = {
+    cardsList: cardsList,
+    onCardDelete: handleCardDelete,
   }
 
   //? Разметка страницы
@@ -81,16 +113,14 @@ function App() {
     <div className="page">
       <currentUserContext.Provider value={currentUser}>
         <Header />
-        <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} />
+        <Main cardProps={cardProps} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} />
         <Footer />
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
-        <PopUpWithForm name='create-cards' title='Новое место' formId='cardForm' buttonText='Сохранить' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
-          <CardPopup />
-        </PopUpWithForm>
+        <AddCardPopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddCard={handleAddCard} />
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
         <ImagePopup card={selectedCard} isOpen={imagePopupOpen} onClose={closeAllPopups} />
       </currentUserContext.Provider>
-    </div>
+    </div >
   );
 }
 
