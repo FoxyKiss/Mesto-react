@@ -12,10 +12,11 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   const [description, setDescription] = React.useState('')
   const profileInfo = { name, setName, description, setDescription }
 
+  //! Данная особенность была оставлена ещё с предудыщих спринтов, по совету ревьюеров цитириую "При случайно закрытии Popup данные должны оставаться там для удобства"
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, isOpen]);
 
   //? Функция отправки формы
   function handleSubmit(evt) {
