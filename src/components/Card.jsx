@@ -2,7 +2,7 @@ import React from 'react'
 import { currentUserContext } from '../contexts/currentUserContext'
 
 //? Разметка краточек
-export default function Card({ card, onCardClick, onCardDelete }) {
+export default function Card({ card, onCardClick, onCardDelete, onCardLike }) {
   //? Подписываемся на контекст для получения данных пользователя
   const currentUser = React.useContext(currentUserContext)
 
@@ -21,14 +21,17 @@ export default function Card({ card, onCardClick, onCardDelete }) {
   function handleCardDelete() {
     onCardDelete(card._id)
   }
-
+  //? Функция лайка карточки
+  function handleLikeClick() {
+    onCardLike(card)
+  }
   return (<li className="cards__list_element">
     <button type="button" className={deleteButtonClass} onClick={handleCardDelete}></button>
     <img className="cards__image" src={card.link} alt={card.name} onClick={handleCardClick} />
     <div className="cards__info">
       <h2 className="cards__name">{card.name}</h2>
       <div className="cards__like-container">
-        <button type="button" className={likeButtonClass}></button>
+        <button type="button" className={likeButtonClass} onClick={handleLikeClick}></button>
         <p className="cards__like-number">{card.likes.length}</p>
       </div>
     </div>

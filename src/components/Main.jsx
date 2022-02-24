@@ -31,7 +31,7 @@ export default function Main({ cardProps, onEditProfile, onAddPlace, onEditAvata
         <ul className="cards__list">
           {cardProps.cardsList.map((card) => {
             return (
-              <Card key={card._id} card={card} onCardClick={onCardClick} onCardDelete={cardProps.onCardDelete} />
+              <Card key={card._id} card={card} onCardClick={onCardClick} onCardDelete={cardProps.onCardDelete} onCardLike={cardProps.onCardLike} />
             );
           })}
         </ul>

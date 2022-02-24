@@ -16,6 +16,7 @@ export default function AddCardPopup({ isOpen, onClose, onAddCard }) {
       name,
       link,
     });
+    evt.target.reset()
   }
   const formProps = {
     name: 'create-cards',

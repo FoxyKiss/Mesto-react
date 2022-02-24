@@ -74,7 +74,19 @@ function App() {
       })
   }
   //? Функция лайка карточки
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
 
+    if (!isLiked) {
+      api.activeLike(card).then((newCard) => {
+        setCardsList((state) => state.map((c) => c._id === card._id ? newCard : c));
+      });
+    } else {
+      api.deactiveLike(card).then((newCard) => {
+        setCardsList((state) => state.map((c) => c._id === card._id ? newCard : c));
+      });
+    }
+  }
 
   //? Обработчик изменения данных профиля
   function handleUpdateUser(data) {
@@ -90,7 +102,7 @@ function App() {
   function handleUpdateAvatar(data) {
     api.setAvatar(data)
       .then((info) => {
-        setCurrentUser(currentUser.avatar = info.avatar)
+        setCurrentUser({ name: currentUser.name, about: currentUser.about, avatar: info.avatar })
       })
     closeAllPopups()
   }
@@ -106,6 +118,7 @@ function App() {
   const cardProps = {
     cardsList: cardsList,
     onCardDelete: handleCardDelete,
+    onCardLike: handleCardLike
   }
 
   //? Разметка страницы

@@ -25,6 +25,7 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       name,
       about: description,
     });
+    evt.target.reset()
   }
 
   //? Свойства формы
