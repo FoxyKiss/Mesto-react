@@ -7,15 +7,15 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   //? Подписываемся на контекст для получения данных пользователя
   const currentUser = React.useContext(currentUserContext)
 
-  React.useEffect(() => {
-    setName(currentUser.name);
-    setDescription(currentUser.about);
-  }, [currentUser]);
-
   //?State переменные для полей ввода
   const [name, setName] = React.useState('')
   const [description, setDescription] = React.useState('')
   const profileInfo = { name, setName, description, setDescription }
+
+  React.useEffect(() => {
+    setName(currentUser.name);
+    setDescription(currentUser.about);
+  }, [currentUser]);
 
   //? Функция отправки формы
   function handleSubmit(evt) {

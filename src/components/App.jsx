@@ -3,7 +3,6 @@ import React from 'react'
 import Header from './Header'
 import Main from './Main'
 import Footer from './Footer'
-import PopUpWithForm from './PopupWithForm'
 import ImagePopup from './ImagePopup'
 import EditProfilePopup from './popupEditInfo/EditProfilePopup'
 import EditAvatarPopup from './popupEditInfo/EditAvatarPopup'
@@ -39,18 +38,21 @@ function App() {
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(true);
   }
+
+  function handleCardClick(name, link) {
+    setSelectedCard({ name, link });
+    setImagePopupOpen(true);
+  }
+
   function closeAllPopups() {
     setEditProfilePopupOpen(false);
     setEditAvatarPopupOpen(false);
     setAddPlacePopupOpen(false);
     setImagePopupOpen(false);
     setSelectedCard({ name: '', link: '' });
+
   }
-  //? Функция открытия Popup с изображением
-  function handleCardClick(name, link) {
-    setSelectedCard({ name, link });
-    setImagePopupOpen(true);
-  }
+
 
   //?Изменение state переменной для получения информации о пользователе и массива карточек
   React.useEffect(() => {
@@ -58,9 +60,7 @@ function App() {
       .then(([info, cardsList]) => {
         setCurrentUser(info);
         setCardsList(cardsList);
-      }).catch((err) => {
-        console.log(`Ошибка: ${err.status}`)
-      });
+      }).catch(err => console.log(`Ошибка: ${err.status}`));
   }, []);
 
 
