@@ -12,7 +12,6 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   const [description, setDescription] = React.useState('')
   const profileInfo = { name, setName, description, setDescription }
 
-
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
@@ -26,7 +25,6 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       name,
       about: description,
     });
-
   }
 
   //? Свойства формы

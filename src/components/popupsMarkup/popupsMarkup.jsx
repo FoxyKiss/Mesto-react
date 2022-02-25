@@ -26,6 +26,7 @@ function ProfilePopup({ profileInfo }) {
 }
 
 function CardPopup({ cardStates }) {
+
   function setName(evt) {
     cardStates.setName(evt.target.value);
   }
@@ -33,7 +34,6 @@ function CardPopup({ cardStates }) {
   function setLink(evt) {
     cardStates.setLink(evt.target.value);
   }
-
 
   return (
     <>
@@ -51,7 +51,6 @@ function CardPopup({ cardStates }) {
 }
 
 function AvatarPopup({ avatarRef }) {
-
   return (
     <>
       <label className="popup__input-label">

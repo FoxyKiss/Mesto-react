@@ -3,6 +3,7 @@ import React from 'react'
 export default function PopUpWithForm({ formProps, isOpen, onClose, children, onSubmit }) {
   const popupRef = React.useRef({})
 
+  //? Закрытие модалки при клике на оверлей
   React.useEffect(() => {
     popupRef.current.addEventListener('click', (evt) => {
       if (evt.target.classList.contains('popup_open')) {

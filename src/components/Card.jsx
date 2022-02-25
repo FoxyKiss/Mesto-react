@@ -1,8 +1,8 @@
 import React from 'react'
 import { currentUserContext } from '../contexts/currentUserContext'
 
-//? Разметка краточек
-export default function Card({ card, onCardClick, onCardDelete, onCardLike }) {
+//? Разметка карточек
+export default function Card({ card, onCardClick, onDeleteClick, onCardLike }) {
   //? Подписываемся на контекст для получения данных пользователя
   const currentUser = React.useContext(currentUserContext)
 
@@ -17,14 +17,17 @@ export default function Card({ card, onCardClick, onCardDelete, onCardLike }) {
   function handleCardClick() {
     onCardClick(card.name, card.link)
   }
-  //? Функция для удаления карточки
+
+  //? Функция для модального окна удаления карточки
   function handleCardDelete() {
-    onCardDelete(card._id)
+    onDeleteClick(card._id)
   }
+
   //? Функция лайка карточки
   function handleLikeClick() {
     onCardLike(card)
   }
+
   return (<li className="cards__list_element">
     <button type="button" className={deleteButtonClass} onClick={handleCardDelete}></button>
     <img className="cards__image" src={card.link} alt={card.name} onClick={handleCardClick} />

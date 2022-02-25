@@ -20,13 +20,14 @@ export default function AddCardPopup({ isOpen, onClose, onAddCard }) {
     setName('')
     setLink('')
   }
+
+  //? Свойства формы
   const formProps = {
     name: 'create-cards',
     title: 'Новое место',
     buttonText: 'Сохранить',
     formId: 'cardForm'
   }
-
 
   return (
     <PopUpWithForm formProps={formProps} isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit}>

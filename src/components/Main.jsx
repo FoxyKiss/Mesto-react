@@ -4,7 +4,7 @@ import Card from './Card'
 //? Импорт контекста
 import { currentUserContext } from '../contexts/currentUserContext'
 
-export default function Main({ cardProps, onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
+export default function Main({ cardProps, onEditProfile, onAddPlace, onEditAvatar, onCardClick, onDeleteClick }) {
   //? Подписываемся на контекст для получения данных пользователя
   const currentUser = React.useContext(currentUserContext)
 
@@ -29,7 +29,8 @@ export default function Main({ cardProps, onEditProfile, onAddPlace, onEditAvata
         <ul className="cards__list">
           {cardProps.cardsList.map((card) => {
             return (
-              <Card key={card._id} card={card} onCardClick={onCardClick} onCardDelete={cardProps.onCardDelete} onCardLike={cardProps.onCardLike} />
+              //?Создание экземпляра карточки
+              <Card key={card._id} card={card} onCardClick={onCardClick} onCardLike={cardProps.onCardLike} onDeleteClick={onDeleteClick} />
             );
           })}
         </ul>
