@@ -34,21 +34,22 @@ function App() {
 
   function handleAddPlaceClick() {
     setAddPlacePopupOpen(true);
+    document.addEventListener('keydown', handleEscClose)
   }
 
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(true);
+    document.addEventListener('keydown', handleEscClose)
   }
 
   function handleCardClick(name, link) {
     setSelectedCard({ name, link });
     setImagePopupOpen(true);
+    document.addEventListener('keydown', handleEscClose)
   }
-
   function handleEscClose(evt) {
     if (evt.key === 'Escape') {
       closeAllPopups()
-      console.log('123')
     }
   }
 

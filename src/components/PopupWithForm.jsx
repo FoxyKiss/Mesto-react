@@ -1,10 +1,19 @@
 import React from 'react'
 
 export default function PopUpWithForm({ formProps, isOpen, onClose, children, onSubmit }) {
+  const popupRef = React.useRef({})
+
+  React.useEffect(() => {
+    popupRef.current.addEventListener('click', (evt) => {
+      if (evt.target.classList.contains('popup_open')) {
+        onClose()
+      }
+    })
+  }, [])
 
   //? Основная разметка Popup
   return (
-    <div className={`popup popup_${formProps.name} ${isOpen && 'popup_open'} `}>
+    <div ref={popupRef} className={`popup popup_${formProps.name} ${isOpen && 'popup_open'} `}>
       <div className="popup__container">
         <h2 className="popup__title">{formProps.title}</h2>
         <form id={formProps.formId} className="popup__form" onSubmit={onSubmit} >
