@@ -29,6 +29,7 @@ function App() {
   //? Функции изменения стейтов для модалок
   function handleEditProfileClick() {
     setEditProfilePopupOpen(true);
+    document.addEventListener('keydown', handleEscClose)
   }
 
   function handleAddPlaceClick() {
@@ -44,15 +45,21 @@ function App() {
     setImagePopupOpen(true);
   }
 
+  function handleEscClose(evt) {
+    if (evt.key === 'Escape') {
+      closeAllPopups()
+      console.log('123')
+    }
+  }
+
   function closeAllPopups() {
     setEditProfilePopupOpen(false);
     setEditAvatarPopupOpen(false);
     setAddPlacePopupOpen(false);
     setImagePopupOpen(false);
     setSelectedCard({ name: '', link: '' });
-
+    document.removeEventListener('keydown', handleEscClose)
   }
-
 
   //?Изменение state переменной для получения информации о пользователе и массива карточек
   React.useEffect(() => {

@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function PopUpWithForm({ formProps, isOpen, onClose, children, onSubmit }) {
+
   //? Основная разметка Popup
   return (
     <div className={`popup popup_${formProps.name} ${isOpen && 'popup_open'} `}>
