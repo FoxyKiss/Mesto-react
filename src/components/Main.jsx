@@ -11,7 +11,7 @@ export default function Main({ cardProps, onEditProfile, onAddPlace, onEditAvata
   //? Разметка основного контента
   return (
     <main className="content">
-      <section className="profile">
+      <div className="profile">
         <div name="profile" className="profile__avatar-container">
           <img className="profile__avatar" src={currentUser.avatar} alt="Аватар" />
           <div className="profile__avatar-overlay">
@@ -24,8 +24,8 @@ export default function Main({ cardProps, onEditProfile, onAddPlace, onEditAvata
           <button className="profile__edit-button" type="button" onClick={onEditProfile} ></button>
         </div>
         <button className="profile__add-button" onClick={onAddPlace}></button>
-      </section>
-      <section className="cards">
+      </div>
+      <div className="cards">
         <ul className="cards__list">
           {cardProps.cardsList.map((card) => {
             return (
@@ -34,7 +34,7 @@ export default function Main({ cardProps, onEditProfile, onAddPlace, onEditAvata
             );
           })}
         </ul>
-      </section>
+      </div>
     </main>
   );
 }
